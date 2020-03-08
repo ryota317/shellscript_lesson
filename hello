@@ -1,0 +1,248 @@
+#!/bin/bash
+
+#変数
+# = の前後に空白を入れるとエラーになってしまう。
+
+#特殊変数
+#  $1,$2 .....
+# $0 でスクリプトの名前
+# $# で引数の数
+#  $@で全ての引数を所得することができる
+# echo "hello $1", echo "hello $2"
+#
+# echo "$0"
+# echo "$#"
+# echo "$@"
+
+# name="mori"
+#
+# readonly="no change name"
+#
+# echo "hello $name"
+# echo 'hello world'
+# echo "hello worldxx ${name} san"
+
+#echo "foo"; echo 'bar'
+
+#ユーザから一行の入力を受け取りname に格納
+
+#入力前にテキストを表示させたい場合は-p
+# read -p "Name: " name
+#
+# echo "$name"
+
+#複数の入力を変数に割り当てる
+# read -p "Pick 3 Colors: " c1 c2 c3
+#
+# echo "$c1"
+# echo "$c2"
+# echo "$c3"
+
+#配列
+#
+# colors=(red blue pink)
+# echo ${colors[0]}
+# echo ${colors[1]}
+# echo ${colors[2]}
+#
+#
+#
+# #要素の変更をしたい場合
+# colors[1]=silver
+#
+# #配列の末尾に要素を追加したい場合は
+# colors+=(green orange)
+#
+# #要素の個数を表示させたい場合
+# echo ${#colors[@]}
+#
+# #配列の中身全て表示させたい場合
+# echo ${colors[@]}
+
+
+#数値計算
+
+#echo 5 + 2
+
+# echo `expr 5 + 2`
+#最近の計算
+#(())の中の変数には＄はいらない
+# echo $((5 + 2))
+
+# n=5
+# ((n=n+5))
+# echo "$n"
+
+# + - * / % ** ++ --
+
+# echo $((10 / 3)) #3
+
+
+# #if
+# read -p "Name? " name
+#
+# # if test  "$name" = "mori"
+# #前後に空白がいる
+#  if [ "$name" = "mori" ]
+#
+# #その場合
+# then
+#   echo "welcome"
+#
+# elif [ "$name" = "ryota" ];then
+#
+# echo  "welcome,too"
+# else
+#   echo "you are not allowed"
+# fi
+
+
+# read -p "Name? " name
+
+# if test  "$name" = "mori"
+#前後に空白がいる
+ # if [ "$name" = "mori" ]; then
+ #   echo "welcome"
+ # fi
+
+ #[[]] $変数の ""は必要なし
+#= == != -z =~
+
+ # if [[ $name = "mori" ]]; then
+ #   echo "welcome"
+ # fi
+ #入力がない場合
+ # if [[ -z $name ]]; then
+ #   echo "emtpy ... "
+ # fi
+
+
+ # if [[ $name =~ ^t ]]; then
+ #   echo "starts with t... "
+ # fi
+
+# -e -f -d
+# if [[ -f $0 ]]; then
+#   echo "file exists"
+# fi
+
+#ディレクトリーだったら
+# if [[ -d $0 ]]; then
+#   echo "dir exists"
+# fi
+
+# == != > >= < <=
+# # && || !
+# read -p "Number?" n
+# if (( n > 10)); then
+#   echo "bigger than 10"
+# fi
+
+#for
+
+# for i in 1 2 3 4 5
+# for i in {1..5}; do
+#
+# echo $i
+# done
+# for ((i=1; i<=5; i++)) do
+#
+# echo $i
+# done
+# colors=(red blue pink)
+# for color in ${colors[@]}; do
+#   echo $color
+# done
+
+
+# for item in `date`;do
+#最近だと
+# for item in $(date); do
+# echo $item
+# done
+
+#while
+#continue ,break
+#
+# i=0
+# while ((i < 10));do
+# ((i++))
+# echo $i
+# done
+# i=0
+# while ((i < 10));do
+# ((i++))
+# if((i==4));then
+#   continue
+# fi
+# if((i==8));then
+#   break
+# fi
+# echo $i
+# done
+
+#無限ループ　：は nullコマンド　いつでも条件が成立する
+# while :
+# do
+# read -p "commend?" cmd
+# if [[ $cmd == "quit" ]]; then
+#   break
+# else
+#   echo "$cmd"
+# fi
+# done
+
+#ファイルの中身を出力
+# i=1
+# while read line; do
+#
+# echo $i "$line"
+# ((i++))
+# # done < colors.txt
+# done
+
+
+#select
+# read -p "Signal color?" color
+# select color in red blue yellow green;do
+#
+#   case "$color" in
+#     red)
+#     echo "stop"
+#     ;;
+#     blue | green)
+#     echo "go"
+#     ;;
+#
+#     yellow)
+#     echo "caution"
+#     ;;
+#     *)
+#     echo "wrong signal"
+#     break
+#   esac
+#
+# done
+#
+# case
+
+#関数
+# function hello(){
+hello(){
+ local name="moriryota"
+  # echo "hello ... $1"
+
+if [[ $1 == "mori" ]]; then
+  return 0
+else
+  return 1
+fi
+}
+
+# hello
+# hello
+hello mori; echo $?
+hello ryota; echo $?
+
+
+echo $name
